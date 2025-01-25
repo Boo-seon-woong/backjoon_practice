@@ -1,32 +1,37 @@
-//sync_with_stdio(False) 쓰면 출력이 잘못됐다함 근데 왠지는 모르겠음;;;
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
-vector<int> a;
-int n,m,temp;
+vector<string> a,b;
+int n,m;
+string temp;
+bool comp(string a,string b){
+    return a<b;
+}
 
-int search(int begin,int end, int target);
+int search(int begin,int end, string target);
 int main(void){
-    cin.tie(NULL);cout.tie(NULL);
+    ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+    int result=0;
     cin>>n;
+    cin>>m;
     for(int i=0;i<n;i++){
         cin>>temp;
         a.push_back(temp);
     }
-    cin>>m;
-    sort(a.begin(),a.end());
+    sort(a.begin(),a.end(),comp);
     for(int i=0;i<m;i++){
         cin>>temp;
-        printf("%d ",search(0,n-1,temp));
+        result+=search(0,n-1,temp);
+        //b.push_back(temp);
     }
-    cout<<endl;
+    //
+    cout<<result<<endl;
     return 0;
 }
 
-int search(int begin,int end,int target){
+int search(int begin,int end,string target){
     int answer;
     if(begin>=end){
         if(a[begin]!=target) return 0;
