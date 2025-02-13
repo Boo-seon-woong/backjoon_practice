@@ -4,36 +4,44 @@
 
 1 4 5 3 2
 */
-
 #include <iostream>
-#include <vector>
-#include <array>
+#include <deque>
 
 using namespace std;
 
-vector<array<int,2>> b;
-vector<int> result;
-int main(void){
-    ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-    int n,temp,num;
-    int state=0;
-    cin>>n;
-    for(int i=0;i<n;i++){
-        cin>>temp;
-        b.push_back({temp,0});
+int main() {
+    int n;
+    cin >> n;
+
+    deque<pair<int, int>> dq;
+
+    // 입력 받기
+    for (int i = 1; i <= n; i++) {
+        int num;
+        cin >> num;
+        dq.push_back({num, i});
     }
-    for(int i=0;i<n-1;i++){
-        printf("%d fuck\n",i);
-        num=b[state][0];
-        result.push_back(b[state][1]);
-        b.erase(b.begin()+state);
-        if(num>0) num--;
-        state+=num;
+
+    while (!dq.empty()) {
+        int move = dq.front().first;  // 현재 풍선의 이동 값
+        cout << dq.front().second << " ";  // 풍선 번호 출력
+        dq.pop_front();  // 터뜨린 풍선 제거
+
+        if (dq.empty()) break;  // 남은 풍선이 없으면 종료
+
+        // 이동 처리
+        if (move > 0) {
+            for (int i = 0; i < move - 1; i++) {
+                dq.push_back(dq.front());  // 맨 앞 원소를 뒤로 보냄
+                dq.pop_front();
+            }
+        } else {
+            for (int i = 0; i < -move; i++) {
+                dq.push_front(dq.back());  // 맨 뒤 원소를 앞으로 보냄
+                dq.pop_back();
+            }
+        }
     }
-    result.push_back(b[state][1]);
-    for(int i=0;i<n;i++){
-        printf("%d ",result[i]);
-    }
-    cout<<endl;
+
     return 0;
 }
