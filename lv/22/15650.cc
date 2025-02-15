@@ -3,8 +3,8 @@ n m 주어졌을 때
 */
 #include <iostream>
 using namespace std;
-int arr[9];
-int n,m;
+int arr[60];
+int n,m,count=0;
 void cal(int len,int loc);
 int main(void){
     ios_base::sync_with_stdio(false);
@@ -15,6 +15,7 @@ int main(void){
         arr[i]=i;
     }
     cal(m,0);
+    cout<<"count: "<<count<<endl;
     return 0;
 }
 void cal(int len,int loc){
@@ -25,6 +26,7 @@ void cal(int len,int loc){
             }
             cout<<"\n";
             arr[loc]++;
+            count++;
         }
     }
     else{
