@@ -1,2 +1,2 @@
-main: 15650.o
-	g++ -std=c11 -g -o main 15650.o
+main: 9663.o
+	g++ -std=c11 -g -o main 9663.o
