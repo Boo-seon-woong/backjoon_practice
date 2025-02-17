@@ -42,10 +42,10 @@ void func(int size,int pos){
     if(size-1==pos){
         for(int i=0;i<size;i++){
             if(check(pos,i)==true){
-                /*for(int j=0;j<size;j++){
+                for(int j=0;j<size;j++){
                     cout<<arr[j]<<" ";
                 }
-                cout<<endl;*/
+                cout<<endl;
                 count++;
             }
         }
