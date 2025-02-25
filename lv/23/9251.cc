@@ -11,37 +11,32 @@ ACAYKP
 CAPCAK
 */
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include<iostream>
+#include<string>
+#include<algorithm>
 using namespace std;
+int dp[1001][1001];
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
 
-string a,b;
-int aa,bb;//temp_a,temp_b;
-vector<int> v;
+    string a, b;
 
-int main(void){
-    cin>>a>>b;
-    int count=0,len_a=a.length(),len_b=b.length();
-    for(int i=0;i<len_b;i++){
-        bb=b[i]-'A';
-        for(int j=0;j<len_a;j++){
-            aa=a[j]-'A';
-            if(bb==aa) {
-                //arr[count]=j;
-                //count++;
-                if(v.size()==0||v.back()<j) v.push_back(j);
-                else{
-                    for(int k=0;k<v.size();k++){
-                        if(v[k]>=j){
-                            v[k]=j;
-                            break;
-                        }
-                    }
-                }
+    cin >> a >> b;
+    for (int i = 1; i <= a.length(); i++) {
+        for (int j = 1; j <= b.length(); j++) {
+            if (a[i - 1] == b[j-1]) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
             }
+            else {
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+
         }
     }
-    cout<<v.size()<<endl;
+
+    cout << dp[a.length()][b.length()];
+
     return 0;
 }
